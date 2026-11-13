@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El Rosario Studio — Estudio fotográfico en Puebla (demo M4PL3)</title>
+<meta name="description" content="Demo de sitio para El Rosario Studio: sesiones fotográficas y renta de estudio en el Centro Histórico de Puebla. Concepto hecho por M4PL3.">
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/instrument-serif-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-wght-normal.woff2) format("woff2")}
+:root{
+  --paper:#efeae1; --paper-2:#e6e0d4; --ink:#15130f; --mute:#6f695f; --line:rgba(21,19,15,.16); --rose:#6b1d1d;
+  --serif:"Instrument Serif",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  --gut:clamp(18px,3.2vw,48px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:500}
+em{font-style:italic}
+
+/* ribbon + nav */
+.ribbon{background:var(--ink);color:var(--paper);font-size:12px;letter-spacing:.04em;text-align:center;padding:8px var(--gut)}
+.ribbon b{font-weight:600}
+.ribbon a{border-bottom:1px solid rgba(239,234,225,.5)}
+.nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px var(--gut);background:rgba(239,234,225,.92);border-bottom:1px solid var(--line)}
+.nav .logo img{height:34px;width:auto}
+.nav ul{display:flex;gap:clamp(16px,3vw,40px);list-style:none;font-size:13px}
+.nav ul a{padding:6px 0;border-bottom:1px solid transparent;transition:border-color .2s}
+.nav ul a:hover{border-color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);padding:15px 26px;border-radius:999px;font-size:14px;font-weight:500;letter-spacing:.01em;transition:transform .25s ease,background .25s ease;will-change:transform}
+.btn:hover{transform:translateY(-2px);background:var(--rose)}
+.btn .arr{display:inline-block;transition:transform .25s ease}
+.btn:hover .arr{transform:translateX(4px)}
+.btn.sm{padding:10px 18px;font-size:13px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* intro (revelado) */
+.intro{position:fixed;inset:0;z-index:200;pointer-events:none}
+.ip{position:absolute;left:0;right:0;height:50.5%;background:var(--paper-2);will-change:transform}
+.ip.top{top:0}.ip.bot{bottom:0}
+.ic{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:2}
+.ic img{height:clamp(54px,8vw,92px);width:auto}
+.ic .cnt{font-family:var(--serif);font-size:clamp(40px,6vw,76px);line-height:1;font-variant-numeric:tabular-nums}
+.ic .lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
+.no-js .intro{display:none}
+
+/* hero */
+.hero{position:relative;display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gut);padding:clamp(24px,4vw,56px) var(--gut) clamp(48px,6vw,96px)}
+.hero h1{grid-column:1/13;grid-row:1;position:relative;z-index:3;font-family:var(--serif);font-weight:400;font-size:clamp(66px,14.2vw,270px);line-height:.84;letter-spacing:-.035em;margin-top:clamp(10px,3vw,40px);pointer-events:none}
+.hero h1 .l{display:block;overflow:hidden;padding:.06em 0 .1em;margin-bottom:-.1em}
+.hero h1 .l>span{display:block;will-change:transform}
+.hero h1 .l:nth-child(2){padding-left:.45em}
+.hero h1 em{color:var(--rose);letter-spacing:-.045em}
+.hero-fig{grid-column:8/13;grid-row:1/3;position:relative;align-self:start;margin-top:clamp(0px,1vw,10px);z-index:1}
+.hero-copy{grid-column:1/7;grid-row:2;align-self:end;position:relative;z-index:4;padding-top:clamp(18px,3vw,40px)}
+.hero-copy p.sub{max-width:30ch;font-size:clamp(17px,1.5vw,22px);color:#3b372f;margin:18px 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero .note{font-size:12px;color:var(--mute);margin-top:14px}
+.frame{position:relative;overflow:hidden;background:var(--paper-2);aspect-ratio:4/5}
+.frame img{width:100%;height:100%;object-fit:cover;will-change:transform}
+.hero-fig .frame{aspect-ratio:4/5.2}
+.cap{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:12px;color:var(--mute)}
+.hero-fig .stamp{position:absolute;left:-34px;bottom:64px;background:var(--paper);border:1px solid var(--ink);border-radius:999px;padding:10px 16px;font-size:12px;font-weight:500;z-index:5;transform:rotate(-6deg)}
+/* visor de cámara */
+.vf{position:absolute;inset:0;z-index:6;pointer-events:none;will-change:transform,opacity}
+.vf i{position:absolute;width:34px;height:34px;border:2px solid var(--paper)}
+.vf i:nth-child(1){top:14px;left:14px;border-right:0;border-bottom:0}
+.vf i:nth-child(2){top:14px;right:14px;border-left:0;border-bottom:0}
+.vf i:nth-child(3){bottom:14px;left:14px;border-right:0;border-top:0}
+.vf i:nth-child(4){bottom:14px;right:14px;border-left:0;border-top:0}
+.vf b{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;background:linear-gradient(var(--paper),var(--paper)) center/2px 100% no-repeat,linear-gradient(var(--paper),var(--paper)) center/100% 2px no-repeat}
+.vf span{position:absolute;left:18px;right:18px;bottom:56px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;color:var(--paper);font-weight:500;text-transform:uppercase}
+.flash{position:absolute;inset:0;background:var(--paper);opacity:0;z-index:7;pointer-events:none}
+
+/* marquee */
+.marq{border-block:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:18px 0}
+.marq-in{display:inline-flex;will-change:transform;font-family:var(--serif);font-size:clamp(28px,3.6vw,52px);line-height:1}
+.marq-in span{display:inline-flex;gap:48px;align-items:center;padding-right:48px}
+.marq-in i{font-style:italic;color:var(--rose)}
+
+/* split words */
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.06em 0 .12em;margin-bottom:-.12em}
+.w>span{display:inline-block;will-change:transform}
+
+/* sections */
+section{padding:clamp(80px,11vw,170px) var(--gut)}
+.num{font-family:var(--serif);font-size:13px;letter-spacing:.14em;color:var(--mute);display:flex;align-items:center;gap:14px;margin-bottom:22px;font-style:italic}
+.num:after{content:"";height:1px;width:64px;background:var(--mute)}
+.mega{font-family:var(--serif);font-weight:400;font-size:clamp(70px,16vw,300px);line-height:.82;letter-spacing:-.04em}
+.mega em{color:var(--rose);letter-spacing:-.05em}
+
+/* statement */
+.stmt{padding-block:clamp(90px,13vw,200px)}
+.stmt p{font-family:var(--serif);font-size:clamp(38px,7.4vw,132px);line-height:.98;letter-spacing:-.025em;max-width:16ch}
+.stmt p .sw{opacity:.14}
+.stmt p em{color:var(--rose)}
+
+/* sesiones */
+#sesiones{position:relative;overflow:hidden;padding-top:0}
+.bgword{position:absolute;left:0;top:clamp(120px,14vw,260px);font-family:var(--serif);font-size:clamp(180px,38vw,700px);line-height:.8;letter-spacing:-.05em;color:transparent;-webkit-text-stroke:1px rgba(107,29,29,.28);white-space:nowrap;pointer-events:none;will-change:transform;z-index:0}
+.ses-head{position:relative;z-index:2;margin-bottom:clamp(40px,6vw,90px)}
+.ses{position:relative;z-index:2;display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut);align-items:start}
+.ses-feat{grid-column:1/8;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ses-feat .frame:nth-child(2){margin-top:clamp(40px,8vw,130px)}
+.ses-info{grid-column:8/13;position:sticky;top:110px;padding-top:6px}
+.tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--rose);color:var(--rose);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.tag:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rose)}
+.ses-info h3{font-family:var(--serif);font-weight:400;font-size:clamp(46px,5.6vw,92px);line-height:.92;margin:22px 0 18px;letter-spacing:-.02em}
+.ses-info h3 em{color:var(--rose)}
+.ses-info p{color:#3b372f;max-width:42ch;margin-bottom:26px}
+.ses-list{list-style:none;margin-top:44px;border-top:1px solid var(--line)}
+.ses-list li{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:clamp(24px,2.4vw,34px);line-height:1.1}
+.ses-list li span{font-family:var(--sans);font-size:12px;color:var(--mute);align-self:center;text-align:right}
+
+/* galeria */
+#galeria{background:var(--paper-2);overflow:hidden}
+.gal-pin{position:relative}
+.gal-track{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,1.6vw,24px);align-items:start}
+.gal-intro,.gal-end{grid-column:1/-1}
+.gal-intro{margin-bottom:clamp(20px,4vw,50px)}
+.gal-intro p.t{max-width:34ch;color:#3b372f;margin-top:22px}
+.gal-intro .hint{margin-top:14px}
+.hz-item:nth-child(even){margin-top:36px}
+.hz-item figcaption{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-top:10px}
+.hz-item{cursor:zoom-in}
+.gal-end{margin-top:clamp(36px,5vw,70px);padding-top:24px;border-top:1px solid var(--ink);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.gal-end p{font-family:var(--serif);font-size:clamp(28px,3.4vw,52px);line-height:1.05}
+.hud{display:none}
+/* modo horizontal (solo escritorio) */
+#galeria.hz{padding:0}
+.hz .gal-pin{height:100vh;height:100svh;display:flex;align-items:center}
+.hz .gal-track{display:flex;gap:clamp(24px,3.4vw,56px);align-items:center;padding:0 var(--gut);will-change:transform;width:max-content}
+.hz .gal-intro{flex:0 0 min(46vw,720px);margin:0}
+.hz .gal-intro .mega{font-size:clamp(90px,12vw,210px)}
+.hz .hz-item{flex:0 0 auto;margin:0;width:calc(60svh*.8)}
+.hz .hz-item:nth-of-type(3n+2){width:calc(48svh*.8);align-self:flex-start;margin-top:12svh}
+.hz .hz-item:nth-of-type(3n){width:calc(68svh*.8);align-self:flex-end;margin-bottom:11svh}
+.hz .hz-item .frame{aspect-ratio:4/5}
+.hz .hz-item .frame img{transform:scale(1.25)}
+.hz .gal-end{flex:0 0 min(40vw,520px);margin:0;border:0;padding:0;flex-direction:column;align-items:flex-start;justify-content:center}
+.hz .hud{display:flex;position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(18px,3.4vh,36px);align-items:center;gap:20px;font-size:12px;letter-spacing:.14em;color:var(--mute);text-transform:uppercase;z-index:3}
+.hud .cur{font-family:var(--serif);font-size:30px;letter-spacing:0;color:var(--ink);line-height:1;min-width:2ch}
+.hud .bar{flex:1;height:1px;background:var(--line);position:relative;overflow:hidden}
+.hud .bar i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left}
+
+/* renta */
+.renta{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut);align-items:center}
+.renta .frame{grid-column:1/6;aspect-ratio:4/5.4}
+.renta-copy{grid-column:7/13}
+.renta-copy h2{margin:18px 0 26px}
+.renta-copy p{max-width:44ch;color:#3b372f;margin-bottom:12px}
+.renta-copy ul{list-style:none;margin:28px 0 34px;border-top:1px solid var(--line)}
+.renta-copy li{padding:14px 0;border-bottom:1px solid var(--line);display:flex;gap:16px;font-size:15px}
+.renta-copy li b{font-family:var(--serif);font-weight:400;font-size:22px;color:var(--rose);min-width:28px;line-height:1.2}
+
+/* contacto */
+#contacto{border-top:1px solid var(--line)}
+.contact-big{margin:18px 0 clamp(36px,5vw,70px)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,80px)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut);border-top:1px solid var(--ink);padding-top:28px}
+.contact-grid h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);font-weight:500;margin-bottom:10px}
+.contact-grid p,.contact-grid a{font-size:clamp(18px,1.6vw,22px);line-height:1.35}
+.contact-grid a{border-bottom:1px solid var(--line)}
+.contact-grid a:hover{border-color:var(--ink)}
+
+footer{padding:0 var(--gut) 36px;font-size:13px;color:#3b372f}
+.demo-box{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.demo-box strong{color:var(--ink);font-weight:600}
+.demo-box a{border-bottom:1px solid var(--ink);color:var(--ink)}
+.legal{margin-top:18px;font-size:12px;opacity:.7;max-width:80ch}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(239,234,225,.97);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img{max-height:86vh;max-width:min(92vw,720px);width:auto;transform:scale(.97);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.lb.on img{transform:none}
+.lb button{position:absolute;top:18px;right:var(--gut);background:none;border:1px solid var(--ink);border-radius:999px;padding:9px 18px;font:500 13px var(--sans);cursor:pointer}
+.lb .n{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:12px;color:var(--mute)}
+
+.rv{will-change:transform,opacity}
+
+@media (max-width:900px){
+  .nav ul{display:none}
+  .hero{display:block}
+  .hero h1{font-size:19vw;margin-top:6px}
+  .hero h1 .l:nth-child(2){padding-left:.2em}
+  .hero-fig{margin:18px 0 0;width:100%}
+  .hero-fig .stamp{left:10px}
+  .hero-copy{padding-top:26px}
+  .ses{display:block}
+  .ses-feat{margin-bottom:36px}
+  .ses-info{position:static}
+  .bgword{font-size:60vw}
+  .renta{display:block}
+  .renta .frame{margin-bottom:36px}
+  .contact-grid{grid-template-columns:1fr;gap:26px}
+}
+@media (prefers-reduced-motion:reduce){.intro{display:none}}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="ip top"></div><div class="ip bot"></div>
+  <div class="ic"><img src="img/logo.png" alt=""><div class="cnt" id="cnt">00</div><div class="lbl">Revelando</div></div>
+</div>
+
+<div class="ribbon"><b>Demo conceptual</b> hecha por <a href="https://m4pl3.xyz" rel="noopener">M4PL3</a> · No es el sitio oficial de El Rosario Studio</div>
+
+<header class="nav">
+  <a class="logo" href="#top" aria-label="El Rosario Studio"><img src="img/logo.png" alt="El Rosario"></a>
+  <ul>
+    <li><a href="#sesiones">Sesiones</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#renta">Renta de estudio</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="btn sm" href="https://ig.me/m/elrosario.studio" target="_blank" rel="noopener">Agenda tu sesión</a>
+</header>
+
+<main id="top">
+<div class="hero" id="hero">
+  <h1 aria-label="Estudio fotográfico en Puebla">
+    <span class="l"><span>Estudio</span></span>
+    <span class="l"><span>fotográfico</span></span>
+    <span class="l"><span>en <em>Puebla</em></span></span>
+  </h1>
+  <figure class="hero-fig">
+    <div class="frame" id="heroFrame">
+      <img id="heroImg" src="img/blusa.jpg" alt="Retrato en blanco y negro de una mujer sentada, sesión en El Rosario Studio" fetchpriority="high">
+      <div class="vf" id="vf"><i></i><i></i><i></i><i></i><b></b><span><em style="font-style:normal">f/2.8</em><em style="font-style:normal">1/125</em><em style="font-style:normal">ISO 100</em></span></div>
+      <div class="flash" id="flash"></div>
+    </div>
+    <span class="stamp rv">Sesión navideña 2026 · abierta</span>
+    <figcaption class="cap"><span>Retrato · blanco y negro</span><span>Foto: El Rosario Studio</span></figcaption>
+  </figure>
+  <div class="hero-copy">
+    <p class="eyebrow rv">El Rosario Studio · Centro Histórico, Puebla</p>
+    <p class="sub rv">Sesiones fotográficas y renta de estudio en el Centro Histórico.</p>
+    <div class="cta rv">
+      <a class="btn" href="https://ig.me/m/elrosario.studio" target="_blank" rel="noopener">Agenda tu sesión <span class="arr">→</span></a>
+      <a class="btn ghost" href="#galeria">Ver galería</a>
+    </div>
+    <p class="note rv">Hoy las sesiones se agendan por mensaje directo en Instagram.</p>
+  </div>
+</div>
+
+<div class="marq" aria-hidden="true">
+  <div class="marq-in" id="marq">
+    <span>Sesiones fotográficas <i>✦</i> Renta de estudio <i>✦</i> Comunidad fotográfica <i>✦</i> Centro Histórico de Puebla <i>✦</i></span>
+    <span>Sesiones fotográficas <i>✦</i> Renta de estudio <i>✦</i> Comunidad fotográfica <i>✦</i> Centro Histórico de Puebla <i>✦</i></span>
+  </div>
+</div>
+
+<section class="stmt">
+  <p id="stmt">La luz, el fondo y <em>tú.</em> El resto lo hacemos nosotros.</p>
+</section>
+
+<section id="sesiones">
+  <div class="bgword" id="bgword" aria-hidden="true">2026</div>
+  <div class="ses-head">
+    <p class="num rv">01 — Sesiones</p>
+    <h2 class="mega split">Sesiones <em>abiertas</em></h2>
+  </div>
+  <div class="ses">
+    <div class="ses-feat">
+      <div class="frame rev"><img data-par src="img/navidad.jpg" alt="Pareja posando con un regalo entre piñas, sesión navideña" loading="lazy"></div>
+      <div class="frame rev"><img data-par src="img/gorro.jpg" alt="Retrato con gorro de piel y brillos en el rostro, sesión navideña" loading="lazy"></div>
+    </div>
+    <div class="ses-info">
+      <span class="tag rv">Abierta ahora</span>
+      <h3 class="split">Sesión <em>navideña</em> 2026</h3>
+      <p class="rv">Fondo, luz y ambiente de temporada para retratos individuales, de pareja o familia. Lugares limitados: se agenda por mensaje directo.</p>
+      <a class="btn rv" href="https://ig.me/m/elrosario.studio" target="_blank" rel="noopener">Reservar por DM <span class="arr">→</span></a>
+      <ul class="ses-list rv">
+        <li>Retrato individual <span>Estudio</span></li>
+        <li>Parejas y familia <span>Estudio</span></li>
+        <li>Sesión temática <span>Por temporada</span></li>
+      </ul>
+      <p class="eyebrow rv" style="margin-top:16px">Precios en la historia destacada «Precios» de Instagram</p>
+    </div>
+  </div>
+</section>
+
+<section id="galeria">
+  <div class="gal-pin" id="galPin">
+    <div class="gal-track" id="galTrack">
+      <div class="gal-intro">
+        <p class="num">02 — Galería</p>
+        <h2 class="mega">Sin <em>ruido</em></h2>
+        <p class="t">Una selección de sesiones reales. Toca una foto para verla más grande.</p>
+        <p class="eyebrow hint">Desplaza para recorrer →</p>
+      </div>
+      <figure class="hz-item"><div class="frame"><img src="img/kimono.jpg" alt="Mujer con kimono y abanico"></div><figcaption><span>01</span><span>Retrato</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/jeans.jpg" alt="Mujer sentada en el piso con jeans y tacones"></div><figcaption><span>02</span><span>Moda</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/rizos.jpg" alt="Mujer de cabello rizado abrazando sus rodillas"></div><figcaption><span>03</span><span>Retrato</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/chef.jpg" alt="Chef sentado en retrato con viñeta ovalada"></div><figcaption><span>04</span><span>Marca personal</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/gato.jpg" alt="Persona con sombrero y un gato negro sobre un banco"></div><figcaption><span>05</span><span>Con mascota</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/rayas.jpg" alt="Retrato de joven con gorro de piel y playera de rayas"></div><figcaption><span>06</span><span>Retrato</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/sombrero.jpg" alt="Mujer con sombrero vaquero y blazer"></div><figcaption><span>07</span><span>Moda</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/traje.jpg" alt="Persona con traje negro y corbata sentada en el piso"></div><figcaption><span>08</span><span>Retrato</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/pelirroja.jpg" alt="Mujer recostada boca abajo con tacones"></div><figcaption><span>09</span><span>Moda</span></figcaption></figure>
+      <figure class="hz-item"><div class="frame"><img src="img/vaqueros.jpg" alt="Pareja con sombrero vaquero sobre fondo café"></div><figcaption><span>10</span><span>Parejas</span></figcaption></figure>
+      <div class="gal-end">
+        <p>Hay más en Instagram.</p>
+        <a class="btn ghost" href="https://www.instagram.com/elrosario.studio/" target="_blank" rel="noopener">@elrosario.studio <span class="arr">↗</span></a>
+      </div>
+    </div>
+    <div class="hud" aria-hidden="true"><span class="cur" id="hudCur">01</span><span>/ 10</span><div class="bar"><i id="hudBar"></i></div><span>Galería</span></div>
+  </div>
+</section>
+
+<section id="renta">
+  <div class="renta">
+    <div class="frame rev"><img data-par src="img/arlequin.jpg" alt="Sesión de estudio sobre fondo blanco continuo" loading="lazy"></div>
+    <div class="renta-copy">
+      <p class="num rv">03 — Renta de estudio</p>
+      <h2 class="mega split" style="font-size:clamp(60px,9.4vw,170px)">Tu sesión, <em>nuestro espacio</em></h2>
+      <p class="rv" style="margin-top:26px">¿Eres fotógrafo, marca o creador? Renta el estudio para tus propias producciones en pleno Centro Histórico.</p>
+      <ul class="rv">
+        <li><b>01</b> Pregunta disponibilidad por mensaje directo</li>
+        <li><b>02</b> Define horario y tipo de producción</li>
+        <li><b>03</b> Llega y crea</li>
+      </ul>
+      <a class="btn rv" href="https://ig.me/m/elrosario.studio" target="_blank" rel="noopener">Consultar renta <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <p class="num rv">04 — Contacto</p>
+  <h2 class="mega contact-big split">Escríbenos <em>por DM</em></h2>
+  <div class="cta-row rv">
+    <a class="btn" href="https://ig.me/m/elrosario.studio" target="_blank" rel="noopener">Agenda tu sesión <span class="arr">→</span></a>
+    <a class="btn ghost" href="https://www.instagram.com/elrosario.studio/" target="_blank" rel="noopener">Ver Instagram ↗</a>
+  </div>
+  <div class="contact-grid rv">
+    <div><h4>Instagram</h4><a href="https://www.instagram.com/elrosario.studio/" target="_blank" rel="noopener">@elrosario.studio</a></div>
+    <div><h4>Ubicación</h4><a href="https://www.google.com/maps/search/?api=1&query=El+Rosario+Studio+Centro+Hist%C3%B3rico+Puebla" target="_blank" rel="noopener">Centro Histórico de Puebla</a></div>
+    <div><h4>Se agenda por</h4><p>Mensaje directo en Instagram</p></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="demo-box">
+    <p><strong>Esto es un ejemplo.</strong> Demo conceptual diseñada por <a href="https://m4pl3.xyz" rel="noopener">M4PL3</a> para mostrar cómo podría verse el sitio de El Rosario Studio.</p>
+    <a href="https://m4pl3.xyz" rel="noopener">m4pl3.xyz ↗</a>
+  </div>
+  <p class="legal">Fotografías y logotipo © El Rosario Studio, tomados de su perfil público de Instagram solo para esta demostración. No es el sitio oficial ni está afiliado al negocio.</p>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada"><button type="button" id="lbx">Cerrar</button><img alt=""><div class="n"></div></div>
+
+<script src="lib/gsap.min.js"></script>
+<script src="lib/ScrollTrigger.min.js"></script>
+<script src="lib/lenis.min.js"></script>
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var $=function(s,c){return (c||document).querySelector(s)}, $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+  /* lightbox */
+  var lb=$('#lb'),lbi=$('img',lb),lbn=$('.n',lb),lenis=null;
+  var items=$$('.hz-item');
+  items.forEach(function(f,i){
+    f.addEventListener('click',function(){var im=$('img',f);lbi.src=im.src;lbi.alt=im.alt;lbn.textContent=(i+1)+' / '+items.length;lb.classList.add('on');if(lenis)lenis.stop()});
+  });
+  function closeLb(){lb.classList.remove('on');if(lenis)lenis.start()}
+  lb.addEventListener('click',function(e){if(e.target!==lbi)closeLb()});
+  addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
+
+  if(reduce||!window.gsap){$$('.stmt .sw').forEach(function(n){n.style.opacity=1});return}
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* dividir en palabras (con máscara) */
+  function splitWords(el,cls){
+    (function walk(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType===3){
+          var frag=document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(t){
+            if(!t)return;
+            if(/^\s+$/.test(t)){frag.appendChild(document.createTextNode(' '));return}
+            var w=document.createElement('span');w.className=cls;var s=document.createElement('span');s.textContent=t;w.appendChild(s);frag.appendChild(w);
+          });
+          node.replaceChild(frag,n);
+        }else if(n.nodeType===1){walk(n)}
+      });
+    })(el);
+  }
+  $$('.split').forEach(function(el){
+    splitWords(el,'w');
+    var spans=$$('.w>span',el);
+    gsap.set(spans,{yPercent:115});
+    ScrollTrigger.create({trigger:el,start:'top 88%',once:true,onEnter:function(){gsap.to(spans,{yPercent:0,duration:1.2,ease:'power4.out',stagger:.07})}});
+  });
+  /* statement: palabras que se encienden con el scroll */
+  var st=$('#stmt');splitWords(st,'sw');
+  $$('.sw',st).forEach(function(w){w.style.display='inline-block'});
+  gsap.to($$('.sw',st),{opacity:1,ease:'none',stagger:.12,scrollTrigger:{trigger:st,start:'top 80%',end:'bottom 45%',scrub:.4}});
+
+  /* smooth scroll */
+  lenis=new Lenis({duration:1.05,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t))}});
+  lenis.stop();
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(function(t){lenis.raf(t*1000)});
+  gsap.ticker.lagSmoothing(0);
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){var id=a.getAttribute('href');var t=id==='#top'?0:$(id);if(t!==null){e.preventDefault();lenis.scrollTo(t,{offset:id==='#top'?0:-60,duration:1.6})}});
+  });
+
+  /* ===== INTRO: revelado de cámara ===== */
+  var cnt=$('#cnt'),o={v:0};
+  gsap.set('.hero h1 .l>span',{yPercent:112});
+  gsap.set('.hero .rv, .hero .stamp',{opacity:0,y:30});
+  gsap.set('#heroFrame',{clipPath:'inset(0% 0% 100% 0%)'});
+  gsap.set('#heroImg',{scale:1.35});
+  gsap.set('#vf',{scale:1.18,opacity:0});
+  var intro=gsap.timeline({defaults:{ease:'power3.out'}});
+  intro.to(o,{v:100,duration:1.5,ease:'power2.inOut',onUpdate:function(){cnt.textContent=('0'+Math.round(o.v)).slice(-3).replace(/^0+(?=\d)/,'')}},0)
+    .to('.ic',{opacity:0,y:-14,duration:.45,ease:'power2.in'},1.6)
+    .to('.ip.top',{yPercent:-101,duration:1.15,ease:'power4.inOut'},1.95)
+    .to('.ip.bot',{yPercent:101,duration:1.15,ease:'power4.inOut'},1.95)
+    .to('#heroFrame',{clipPath:'inset(0% 0% 0% 0%)',duration:1.4,ease:'power4.inOut'},2.2)
+    .to('#heroImg',{scale:1,duration:2.2,ease:'power3.out'},2.2)
+    .to('#vf',{opacity:1,scale:1,duration:.9},2.5)
+    .to('.hero h1 .l>span',{yPercent:0,duration:1.3,stagger:.12,ease:'power4.out'},2.55)
+    .to('#flash',{opacity:.85,duration:.07,ease:'none'},3.55)
+    .to('#flash',{opacity:0,duration:.55,ease:'power2.out'},3.62)
+    .to('#vf',{opacity:0,duration:.5},3.62)
+    .to('.hero .rv, .hero .stamp',{opacity:1,y:0,duration:1,stagger:.1},3.0)
+    .set('#intro',{display:'none'},3.2)
+    .add(function(){lenis.start();ScrollTrigger.refresh()},3.2);
+
+  /* reveals genéricos */
+  $$('.rv').forEach(function(el){
+    if(el.closest('.hero'))return;
+    gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}});
+  });
+
+  /* imágenes con máscara (clip-path) + parallax interno */
+  $$('.frame.rev').forEach(function(f){
+    gsap.fromTo(f,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.4,ease:'power4.inOut',scrollTrigger:{trigger:f,start:'top 88%',once:true}});
+  });
+  $$('img[data-par]').forEach(function(img){
+    gsap.fromTo(img,{yPercent:-7,scale:1.16},{yPercent:7,scale:1.16,ease:'none',scrollTrigger:{trigger:img.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+  /* hero: parallax suave al salir */
+  gsap.to('#heroImg',{yPercent:8,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.hero h1',{yPercent:-12,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  /* palabra gigante de fondo */
+  gsap.fromTo('#bgword',{xPercent:0},{xPercent:-38,ease:'none',scrollTrigger:{trigger:'#sesiones',start:'top bottom',end:'bottom top',scrub:true}});
+
+  /* ===== GALERÍA horizontal anclada (escritorio) ===== */
+  var mm=gsap.matchMedia();
+  mm.add('(min-width:901px) and (min-height:560px)',function(){
+    var sec=$('#galeria'),track=$('#galTrack'),cur=$('#hudCur'),bar=$('#hudBar');
+    sec.classList.add('hz');
+    var dist=function(){return Math.max(0,track.scrollWidth-innerWidth)};
+    var tw=gsap.to(track,{x:function(){return -dist()},ease:'none',scrollTrigger:{
+      trigger:'#galPin',start:'top top',end:function(){return '+='+dist()},pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true,
+      onUpdate:function(self){
+        gsap.set(bar,{scaleX:self.progress});
+        var n=Math.min(items.length,Math.max(1,Math.round(self.progress*(items.length-1))+1));
+        var t=('0'+n).slice(-2); if(cur.textContent!==t)cur.textContent=t;
+      }}});
+    /* cada foto: entra con máscara y su imagen se desplaza dentro del marco */
+    items.forEach(function(it){
+      var fr=$('.frame',it),img=$('img',it);
+      gsap.fromTo(img,{xPercent:-9},{xPercent:9,ease:'none',scrollTrigger:{trigger:it,containerAnimation:tw,start:'left right',end:'right left',scrub:true}});
+      gsap.fromTo(fr,{clipPath:'inset(0% 0% 100% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'power2.out',scrollTrigger:{trigger:it,containerAnimation:tw,start:'left 98%',end:'left 62%',scrub:true}});
+    });
+    return function(){sec.classList.remove('hz')};
+  });
+  mm.add('(max-width:900px), (max-height:559px)',function(){
+    /* galería en cuadrícula: máscara por foto */
+    items.forEach(function(it){
+      var fr=$('.frame',it);
+      gsap.fromTo(fr,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.2,ease:'power4.inOut',scrollTrigger:{trigger:it,start:'top 90%',once:true}});
+    });
+  });
+
+  /* marquee: deriva constante + empuje con la velocidad del scroll */
+  var m=$('#marq'),x=0,v=0;
+  lenis.on('scroll',function(e){v=e.velocity});
+  gsap.ticker.add(function(t,dt){
+    x-=.5*dt/16+Math.abs(v)*.35;var h=m.scrollWidth/2;if(-x>=h)x+=h;
+    m.style.transform='translate3d('+x+'px,0,0)';
+  });
+
+  addEventListener('load',function(){ScrollTrigger.refresh()});
+})();
+</script>
+</body>
+</html>
